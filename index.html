@@ -3,132 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Dalam Perbaikan</title>
+    <title>WEB APP BUG BY:ALYA STORE</title>
     <style>
         body {
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-image: url('https://files.catbox.moe/sub7yh.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             overflow: hidden;
         }
-        
-        .maintenance-container {
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            display: none;
             text-align: center;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 80%;
-            position: relative;
-            overflow: hidden;
         }
-        
-        h1 {
-            color: #e74c3c;
+        h2 {
+            text-align: center;
             margin-bottom: 20px;
-            font-size: 2rem;
         }
-        
-        p {
-            color: #333;
-            font-size: 1.2rem;
+        .form-group {
             margin-bottom: 15px;
         }
-        
-        .date {
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
-            color: #3498db;
-            font-size: 1.3rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        .menu-option {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .menu-option:hover {
+            background-color: #45a049;
+        }
+        .warning {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #welcomeScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(76, 175, 80, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 24px;
+            z-index: 1000;
+            animation: fadeOut 1.5s ease-in-out 2s forwards;
+        }
+        .apk-download {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .apk-download:hover {
+            background-color: #0b7dda;
+        }
+        .video-link {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #FF5722;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .video-link:hover {
+            background-color: #E64A19;
+        }
+        .coming-soon {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #9E9E9E;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            cursor: not-allowed;
+        }
+        .disclaimer {
+            color: #F44336;
+            font-style: italic;
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .delay-message {
+            color: #FF5722;
+            font-weight: bold;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        #welcomeText {
+            animation: zoomIn 1s ease-in-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .by-line {
             margin-top: 20px;
+            font-size: 16px;
+            animation: slideUp 1s ease-in-out 0.5s both;
         }
-        
-        .dots {
-            display: inline-block;
-            animation: bounce 1.5s infinite;
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        
-        .dots span {
-            display: inline-block;
-            animation: dot-bounce 1.5s infinite;
-        }
-        
-        .dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        @keyframes dot-bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+        .empty-field {
+            border: 1px solid red !important;
         }
     </style>
 </head>
 <body>
-    <div class="maintenance-container pulse">
-        <h1>APP INI SEDANG ADA PERBAIKAN DARI SISTEM</h1>
-        <div class="spinner"></div>
-        <p>MOHON DITUNGGU SAMPAI SELESAI</p>
-        <p>APP INI SEDANG DIPERBAIKI DAN AKAN SELESAI DIPERBAIKI LIAT TANGGAL DIBAWAH/SEGERA MUNGKIN</p>
-        <p class="date">TANGGAL: <span>01/08/2025</span></p>
-        <p class="dots">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-        </p>
+    <!-- Audio Elements -->
+    <audio id="successSound" preload="auto">
+        <source src="https://files.catbox.moe/xv9mgg.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="errorSound" preload="auto">
+        <source src="https://files.catbox.moe/cyfftr.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen">
+        <div id="welcomeText">WELCOME TO APP BUG</div>
+        <div class="by-line">BY: ALYA STORE</div>
     </div>
+
+    <!-- Login Form -->
+    <div class="container" id="loginForm">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username">
+            <div id="usernameError" class="error-message">Username wajib diisi!</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password">
+            <div id="passwordError" class="error-message">Password wajib diisi!</div>
+        </div>
+        <button onclick="checkLogin()">Login</button>
+        <div id="loginMessage" class="error-message"></div>
+    </div>
+
+    <!-- Menu Page -->
+    <div class="container" id="menuPage">
+        <h2>SILAHKAN PILIH MENU DIBAWAH</h2>
+        <p>UNTUK MELANJUTKAN KE MENU BERIKUTNYA</p>
+        
+        <div class="menu-option" onclick="showBugForm()">ALYA BUG MENU</div>
+        <div class="menu-option" onclick="showKenonMenu()">ALYA KENON MENU</div>
+        <div class="menu-option" onclick="showVideoMenu()">ALYA VIDEO ASUPAN MENU</div>
+    </div>
+
+    <!-- Bug Report Form -->
+    <div class="container" id="bugForm">
+        <h2>ALYA BUG MENU</h2>
+        <div class="warning">WAJIB DI ISI IYA GUYS‼️</div>
+        
+        <div class="form-group">
+            <label for="nomor">NOMOR:</label>
+            <input type="text" id="nomor" placeholder="Masukkan nomor">
+            <div id="nomorError" class="error-message">Nomor wajib diisi!</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="kronologi">KRONOLOGI:</label>
+            <textarea id="kronologi" placeholder="Deskripsikan kronologi bug"></textarea>
+            <div id="kronologiError" class="error-message">Kronologi wajib diisi!</div>
+        </div>
+        
+        <button onclick="submitBugReport()">Submit</button>
+        <div id="delayMessage" class="delay-message">TUNGGU 5 MENIT LAGI DI DELAY KAN WHATSAPP TARGET</div>
+        <button onclick="goBackToMenu()" style="background-color: #f44336;">Kembali ke Menu</button>
+    </div>
+
+    <!-- Kenon Menu -->
+    <div class="container" id="kenonMenu">
+        <h2>ALYA KENON MENU</h2>
+        <p>SEMOGA WORK IYA GUYS‼️</p>
+        
+        <a href="https://www.mediafire.com/file/l5kspff9g2lm0xy/%25E0%25BC%25BA_%25F0%259D%2590%2580%25F0%259D%2590%25A9%25F0%259D%2590%25A4_%25F0%259D%2590%258C%25F0%259D%2590%259E%25F0%259D%2590%25AD%25F0%259D%2590%25A1%25F0%259D%2590%25A8%25F0%259D%2590%259D%25F0%259D%2590%259E_%25F0%259D%2590%2596%25F0%259D%2590%25A8%25F0%259D%2590%25AB%25F0%259D%2590%25A4_%25E0%25BC%25BB.apk/file" 
+           class="apk-download" target="_blank">
+           APK KENON BY: ALYA STORE
+        </a>
+        
+        <a href="https://www.mediafire.com/file/l5kspff9g2lm0xy/%25E0%25BC%25BA_%25F0%259D%2590%2580%25F0%259D%2590%25A9%25F0%259D%2590%25A4_%25F0%259D%2590%258C%25F0%259D%2590%259E%25F0%259D%2590%25AD%25F0%259D%2590%25A1%25F0%259D%2590%25A8%25F0%259D%2590%259D%25F0%259D%2590%259E_%25F0%259D%2590%2596%25F0%259D%2590%25A8%25F0%259D%2590%25AB%25F0%259D%2590%25A4_%25E0%25BC%25BB.apk/file" 
+           class="apk-download" target="_blank">
+           APK UNBAN BY: ALYA STORE
+        </a>
+        
+        <button onclick="goBackToMenu()" style="background-color: #f44336; margin-top: 20px;">Kembali ke Menu</button>
+    </div>
+
+    <!-- Video Menu -->
+    <div class="container" id="videoMenu">
+        <h2>ALYA VIDEO ASUPAN MENU</h2>
+        
+        <a href="https://videy.co/v/?id=JmMjijLB1" class="video-link" target="_blank">
+            LINK VIDEO
+        </a>
+        
+        <div class="coming-soon">
+            LINK APK: COMING SOON
+        </div>
+        
+        <div class="disclaimer">
+            DOSA DITANGGUNG SENDIRI😂😅
+        </div>
+        
+        <button onclick="goBackToMenu()" style="background-color: #f44336; margin-top: 20px;">Kembali ke Menu</button>
+    </div>
+
+    <script>
+        // Audio elements
+        const successSound = document.getElementById('successSound');
+        const errorSound = document.getElementById('errorSound');
+        let successSoundTimeout;
+
+        // Show welcome screen first
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loginForm').style.display = 'block';
+            }, 3500); // Match this with the animation duration
+        });
+
+        function checkLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('loginMessage');
+            let isValid = true;
+
+            // Reset error states
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('username').classList.remove('empty-field');
+            document.getElementById('password').classList.remove('empty-field');
+
+            // Validate username
+            if (username.trim() === '') {
+                document.getElementById('usernameError').style.display = 'block';
+                document.getElementById('username').classList.add('empty-field');
+                isValid = false;
+            }
+
+            // Validate password
+            if (password.trim() === '') {
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('password').classList.add('empty-field');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                // Play error sound
+                errorSound.play();
+                
+                message.textContent = 'ISI USERNAME DAN PASSWORD DENGAN BENAR!';
+                message.style.display = 'block';
+                
+                // Shake animation for error
+                document.getElementById('loginForm').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('loginForm').style.animation = '';
+                }, 500);
+                return;
+            }
+            
+            // Valid credentials
+            const validCredentials = [
+                { username: 'ALYA', password: 'KONTOL' }
+            ];
+            
+            // Check if credentials match
+            const matched = validCredentials.some(cred => 
+                cred.username === username && cred.password === password
+            );
+            
+            if (matched) {
+                // Play success sound
+                successSound.play();
+                
+                // Stop the success sound after 3 seconds
+                clearTimeout(successSoundTimeout);
+                successSoundTimeout = setTimeout(() => {
+                    successSound.pause();
+                    successSound.currentTime = 0;
+                }, 3000);
+                
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('menuPage').style.display = 'block';
+                message.style.display = 'none';
+            } else {
+                // Play error sound
+                errorSound.play();
+                
+                message.textContent = 'USERNAME & PASSWORD SALAH';
+                message.style.display = 'block';
+                
+                // Shake animation for error
+                document.getElementById('loginForm').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('loginForm').style.animation = '';
+                }, 500);
+            }
+        }
+
+        // Add shake animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function showBugForm() {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('bugForm').style.display = 'block';
+        }
+
+        function showKenonMenu() {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('kenonMenu').style.display = 'block';
+        }
+
+        function showVideoMenu() {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('videoMenu').style.display = 'block';
+        }
+
+        function goBackToMenu() {
+            document.getElementById('bugForm').style.display = 'none';
+            document.getElementById('kenonMenu').style.display = 'none';
+            document.getElementById('videoMenu').style.display = 'none';
+            document.getElementById('menuPage').style.display = 'block';
+            // Clear form when going back
+            document.getElementById('nomor').value = '';
+            document.getElementById('kronologi').value = '';
+            document.getElementById('nomorError').style.display = 'none';
+            document.getElementById('kronologiError').style.display = 'none';
+            // Hide delay message
+            document.getElementById('delayMessage').style.display = 'none';
+        }
+
+        function submitBugReport() {
+            const nomor = document.getElementById('nomor').value;
+            const kronologi = document.getElementById('kronologi').value;
+            let isValid = true;
+
+            // Validate nomor
+            if (nomor.trim() === '') {
+                document.getElementById('nomorError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nomorError').style.display = 'none';
+            }
+
+            // Validate kronologi
+            if (kronologi.trim() === '') {
+                document.getElementById('kronologiError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('kronologiError').style.display = 'none';
+            }
+
+            if (isValid) {
+                // Show delay message
+                document.getElementById('delayMessage').style.display = 'block';
+                
+                // Hide the message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('delayMessage').style.display = 'none';
+                    alert('Bug report submitted!\nNomor: ' + nomor + '\nKronologi: ' + kronologi);
+                    goBackToMenu();
+                }, 5000); // 5 seconds delay
+            }
+        }
+    </script>
 </body>
-</html>
+    </html>
